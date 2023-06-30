@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ee329a9b39f4d00881bc31e0c051dc3, type: 3}
+  m_Name: TestMap
+  m_EditorClassIdentifier: 
+  <SettingsForBildingGenerator>k__BackingField: {fileID: 11400000, guid: 7986913d03fb54a4691eadf10f70af6d, type: 2}
+  <SpawnPoint>k__BackingField: {fileID: 774212513319438475, guid: 84dbcbac2177b21458142c4610648318, type: 3}
+  <Width>k__BackingField: 100
+  <Height>k__BackingField: 100
+  <Scale>k__BackingField: 13
+  <TreeDensity>k__BackingField: 0.09
+  <SpawnDecorGrass>k__BackingField: 0
+  <SpawnLake>k__BackingField: 0
+  <SpawnRoad>k__BackingField: 0
+  <Forest>k__BackingField:
+  - {fileID: 5425102614676359169, guid: 3220b760278cc5e4985b1d9565aabe49, type: 3}
+  - {fileID: 5666051156545741822, guid: 4ff5cad81a886d243bfcd3e3e3137075, type: 3}
+  - {fileID: 3537863609618242488, guid: 8e8f2551d0a666a4494443e0e8433a7f, type: 3}
+  <Grass>k__BackingField:
+  - {fileID: -1501745890046842727, guid: 3a3e85176ce55e346b1cefe6935a5603, type: 3}
+  - {fileID: 8341515234755193954, guid: 929f42493dbfa7f46925cf4e7b1dcc0b, type: 3}
+  - {fileID: 1161863503680531748, guid: 74785ef0e39f9f94986f15906a88b2c6, type: 3}
+  - {fileID: 39266656657513421, guid: cf8c74fd6ac14be4abcfa7432e9fd2a8, type: 3}
+  - {fileID: -4630781355719483348, guid: 6616f549eb32296489679962b3d8a58c, type: 3}
+  - {fileID: 7461632772532032238, guid: 29f247f7966dc014d819333333649cb8, type: 3}
+  - {fileID: -8417675250006981941, guid: c646fb52afed1e9419fc70d28e5e9310, type: 3}
+  - {fileID: 1942730666151127359, guid: eb68e25e4f66c194fb5c5f016ba20baf, type: 3}
+  - {fileID: -8542129241642073004, guid: 95aff6b77edf6a547b9325be1af922ea, type: 3}
+  - {fileID: -1455438651605048545, guid: e7faa5d64c388ee47887e5d89a28dc5d, type: 3}
+  - {fileID: -1200326617055223585, guid: a691b47aba057c94688029faf33a8da6, type: 3}
+  - {fileID: 7988429458216254218, guid: 092fe51d174a10549a6462e9bad9d29d, type: 3}
+  - {fileID: -1287203271095339607, guid: 5755e79a056541b469409611c4aa4a6f, type: 3}
+  - {fileID: -9004618000932965490, guid: 22075c562e2c7b24fbb1efc388c51cfe, type: 3}
+  - {fileID: 4581651525160315087, guid: 43dff303a3aba114687e7eb5b07deffa, type: 3}
+  - {fileID: -2895066297690329347, guid: 0e61d91424d7388448915e8cf851f311, type: 3}
+  - {fileID: 2161894838254261822, guid: b7c7f99185a9b06428d0afd51cbde7cf, type: 3}
+  - {fileID: -732378922051496509, guid: fe13d199c7606d44895998d83e3e897d, type: 3}
+  - {fileID: -315724944534437652, guid: 5bcd10f01bce1b14898e953de73880a7, type: 3}
+  - {fileID: -779245350546881349, guid: fcf950d88db7d1d4a9effb1eba9fbbe3, type: 3}
+  - {fileID: 6402896282782933196, guid: 541826d892c06b542a996099c25bfe71, type: 3}
+  - {fileID: -8964347078846387809, guid: a553aab863434a840b41f334da950bb0, type: 3}
+  - {fileID: -2812452633440229761, guid: 1575fae3a257e3b44ae8287c2a7f7a29, type: 3}
+  - {fileID: -1192849944688802413, guid: aa47a6d4481617048af272f9acaaf23a, type: 3}
+  - {fileID: -8073991980259936451, guid: db22b7ace5d2cb245a163a21c1484a95, type: 3}
+  - {fileID: 8262773813118360085, guid: e2102c47b1834ee4f8e55889cf291c25, type: 3}
+  - {fileID: 4452369852502839345, guid: f05ca66801fcdb642993130aa34af01a, type: 3}
+  - {fileID: 4339167059485558351, guid: 667adc129fe31e840bfec6c93c20e906, type: 3}
+  - {fileID: 8310592551476040404, guid: 28cadb6cd62166743b6c49b9cd58d761, type: 3}
+  - {fileID: 2807942051508185237, guid: 82a12e6eedece124c9a4c15811260739, type: 3}
+  - {fileID: -4504262074392073578, guid: b4821fff822a931469b53281028c8635, type: 3}
+  - {fileID: 7856008242741532815, guid: e9f34ae065d22514c91d3c508c6d3d1e, type: 3}
+  <Ground>k__BackingField:
+  - {fileID: 1865315171894921975, guid: e33ebc0ffde18874c8ee4e5588bca9a6, type: 3}
+  - {fileID: 7351421484012369899, guid: 5dd889e75a87ee54e9b8a200e6456134, type: 3}
+  - {fileID: 3660831272745604394, guid: fdc4e2d425ec3e345b8825658591b88a, type: 3}
+  - {fileID: -7041131523959891651, guid: eb6ee209b3f1e0948b633f6e181c0968, type: 3}
+  - {fileID: -5500755609550342965, guid: a8151234d60bc2c45af02d23a0c5c744, type: 3}
+  - {fileID: 8097565549535553935, guid: 4f667041f21c61e488cd7c9da818bf06, type: 3}
+  - {fileID: 1606056737492234147, guid: 8e0d8616434687d47bb89de49e08914d, type: 3}
+  - {fileID: -6218588626048391541, guid: a1ab00c88cc6ac44094ede92595e9a56, type: 3}
+  - {fileID: -5187634069607841335, guid: f09e674389a0ed34c9aaf6d2bfce45be, type: 3}
+  <Lake>k__BackingField: {fileID: 1581039369578298417, guid: 7eb216649702c65419a16b6963eb74c2, type: 3}
+  <RocksPrefab>k__BackingField: {fileID: 6277940006407091424, guid: 8afcc4dfbb45b2a48ad0968a6891a5ae, type: 3}

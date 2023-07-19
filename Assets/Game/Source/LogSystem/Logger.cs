@@ -1,8 +1,7 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 
-namespace Game.Source
+namespace Game.LogSystem
 {
     public class Logger : MonoBehaviour
     {
@@ -18,14 +17,28 @@ namespace Game.Source
             }
 
             _fileWriter = new FileWriter(_workDirectory);
-            Application.logMessageReceived += OnLogMessegReceived;
+            Application.logMessageReceivedThreaded += OnLogMessegReceived;
         }
 
-        private void OnDestroy() =>  Application.logMessageReceived -= OnLogMessegReceived;
+        private void OnDestroy()
+        {
+            Application.logMessageReceived -= OnLogMessegReceived;
+            _fileWriter.Dispose();
+        }
 
         private void OnLogMessegReceived(string Condition, string Stacktrace, LogType type)
         {
-            _fileWriter.Write(Condition);
+            if (type == LogType.Exception)
+            {
+                _fileWriter.Write(new LogMessage(type , Condition));
+                _fileWriter.Write(new LogMessage(type , Stacktrace));
+            }
+            else
+            {
+                _fileWriter.Write(new LogMessage(type , Condition));
+            }
+          
         }
+        
     }
 }

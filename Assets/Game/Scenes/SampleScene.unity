@@ -725,6 +725,11 @@ Transform:
   m_Father: {fileID: 1044018140}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1351048892 stripped
+Rigidbody2D:
+  m_CorrespondingSourceObject: {fileID: 1635366740615468601, guid: ad9463892eb46b14482934e3ccaf25a0, type: 3}
+  m_PrefabInstance: {fileID: 1635366741159134715}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1604792008
 GameObject:
   m_ObjectHideFlags: 0
@@ -1173,6 +1178,42 @@ PrefabInstance:
     - target: {fileID: 1635366740615468605, guid: ad9463892eb46b14482934e3ccaf25a0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635366740615468607, guid: ad9463892eb46b14482934e3ccaf25a0, type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635366740615468607, guid: ad9463892eb46b14482934e3ccaf25a0, type: 3}
+      propertyPath: _maxSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635366740615468607, guid: ad9463892eb46b14482934e3ccaf25a0, type: 3}
+      propertyPath: _minSpeed
+      value: 3.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635366740615468607, guid: ad9463892eb46b14482934e3ccaf25a0, type: 3}
+      propertyPath: _rigidbody
+      value: 
+      objectReference: {fileID: 1351048892}
+    - target: {fileID: 1635366740615468607, guid: ad9463892eb46b14482934e3ccaf25a0, type: 3}
+      propertyPath: _stopDelay
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635366740615468607, guid: ad9463892eb46b14482934e3ccaf25a0, type: 3}
+      propertyPath: _startSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635366740615468607, guid: ad9463892eb46b14482934e3ccaf25a0, type: 3}
+      propertyPath: _acceleration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635366740615468607, guid: ad9463892eb46b14482934e3ccaf25a0, type: 3}
+      propertyPath: _deceleration
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1635366740615468607, guid: ad9463892eb46b14482934e3ccaf25a0, type: 3}
+      propertyPath: smoothnessFactor
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 1635366740615468607, guid: ad9463892eb46b14482934e3ccaf25a0, type: 3}
       propertyPath: _variableJoystick

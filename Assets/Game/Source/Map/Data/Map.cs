@@ -27,7 +27,7 @@ namespace Game
         {
             if(Buildings == null)
                 return;
-            this.Buildings = this.Buildings;
+            this.Buildings = Buildings;
         }
     }
 }

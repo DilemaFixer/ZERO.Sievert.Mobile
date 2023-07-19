@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <SettingsForBildingGenerator>k__BackingField: {fileID: 11400000, guid: 7986913d03fb54a4691eadf10f70af6d, type: 2}
   <SpawnPoint>k__BackingField: {fileID: 774212513319438475, guid: 84dbcbac2177b21458142c4610648318, type: 3}
-  <Width>k__BackingField: 100
-  <Height>k__BackingField: 100
+  <Width>k__BackingField: 157
+  <Height>k__BackingField: 193
   <Scale>k__BackingField: 13
   <TreeDensity>k__BackingField: 0.09
   <SpawnDecorGrass>k__BackingField: 0

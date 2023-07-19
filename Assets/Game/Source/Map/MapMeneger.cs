@@ -10,7 +10,7 @@ namespace Game
         [SerializeField] private MapFactory mapFactory;
 
         private Dictionary<int, MapSettings> _mapsSettings;
-        private Map _currentMap;
+        public Map CurrentMap { get; private set; }
 
         private void Start()
         {
@@ -24,35 +24,33 @@ namespace Game
                 throw new ArgumentException("there is no map with this index");
             }
 
-            if (_currentMap != null)
+            if (CurrentMap != null)
             {
                 DestroyMap();
             }
 
-            _currentMap = mapFactory.GenerateMap(_mapsSettings[MapIndex] );
+            CurrentMap = mapFactory.GenerateMap(_mapsSettings[MapIndex] );
         }
         
         private void DestroyMap()
         {
-            for (int i = 0; i < _currentMap.Land.GetLength(0); i++)
+            for (int i = 0; i < CurrentMap.Land.GetLength(0); i++)
             {
-                for (int j = 0; j < _currentMap.Land.GetLength(1); j++)
+                for (int j = 0; j < CurrentMap.Land.GetLength(1); j++)
                 {
-                    Destroy(_currentMap.Land[i,j].gameObject);
+                    Destroy(CurrentMap.Land[i,j].gameObject);
                 }
             }
 
-            for (int i = 0; i < _currentMap.DecorativeObjects.Count; i++)
+            for (int i = 0; i < CurrentMap.DecorativeObjects.Count; i++)
             {
-                Destroy(_currentMap.DecorativeObjects[i]);
+                Destroy(CurrentMap.DecorativeObjects[i]);
             }
             
-            for (int i = 0; i < _currentMap.Buildings.Count; i++)
+            for (int i = 0; i < CurrentMap.Buildings.Count; i++)
             {
-               Destroy(_currentMap.Buildings[i]);
+               Destroy(CurrentMap.Buildings[i]);
             }
-
-            _currentMap = null;
         }
     }
 }

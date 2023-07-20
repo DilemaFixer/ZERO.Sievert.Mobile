@@ -1,8 +1,9 @@
 using System;
 using UnityEngine;
 
-public abstract class IItem:MonoBehaviour
+public abstract class IItem: MonoBehaviour
 {
+   
     [field: SerializeField]public int Amount { get; set; }
     [field: SerializeField]public ItemData Data { get; private set; }
     public abstract event Action OnChange;

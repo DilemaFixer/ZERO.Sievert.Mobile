@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(IItem))]
-public class DefaultItemMovement : MonoBehaviour, ItemMovement
+
+public class DefaultItemMovement : MonoBehaviour, ItemMovement, IPointerDownHandler
 {
     private IItem _item;
     private ISlot _previousSlot;
     private int _previousSibling;
     private bool isMove = false;
+    
     private void Start()
     {
         _item = GetComponent<IItem>();
@@ -19,13 +20,14 @@ public class DefaultItemMovement : MonoBehaviour, ItemMovement
         if (isMove)
         {
             OnDrag();
-            
+
         }
     }
     public void BeginDrag(PointerEventData eventData)
     {
-        
+
         _previousSlot = FindSlot(eventData);
+        _previousSlot.Remove();
         _previousSibling = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
     }
@@ -34,57 +36,59 @@ public class DefaultItemMovement : MonoBehaviour, ItemMovement
     {
 
         transform.position = Input.mousePosition;
-        
+
     }
 
     public void EndDrag(PointerEventData eventData)
     {
         transform.SetSiblingIndex(_previousSibling);
         ISlot slot = FindSlot(eventData);
-        if(slot == null)
+        if (slot == null)
         {
+            _previousSlot.Put(_item);
             transform.position = _previousSlot.transform.position;
             return;
         }
-        
-            if (!slot.IsEmpty)
-            {
-                if (_item.Data.Id != slot.equipedItem.Data.Id)
-                {
-                    IItem extractedItem = slot.Remove();
-                    _previousSlot.Put(extractedItem);
-                    slot.Put(_item);
-                }
-                else
-                {
-                    slot.equipedItem.Add(_previousSlot.equipedItem);
-                    if(_previousSlot.equipedItem != null)
-                    {
-                        transform.position = _previousSlot.transform.position;
 
-                    }
-                    else
-                    {
-                        _previousSlot.Remove();
-                    }
-                }
+        if (!slot.IsEmpty)
+        {
+            if (_item.Data.Id != slot.equipedItem.Data.Id)
+            {
+                IItem extractedItem = slot.Remove();
+                _previousSlot.Put(extractedItem);
+                slot.Put(_item);
             }
             else
             {
-                slot.Put(_item);
-                _previousSlot?.Remove();
+                slot.equipedItem.Add(_item);
+                //if (_previousSlot.equipedItem != null)
+                //{
+                transform.position = _previousSlot.transform.position;
+                _previousSlot.Put(_item);
+
+                //}
+                /*else
+                {
+                    _previousSlot.Remove();
+                }*/
             }
-            
+        }
+        else
+        {
+            slot.Put(_item);
+            //_previousSlot?.Remove();
+        }
+
     }
-        
-    
+
+
     private ISlot FindSlot(PointerEventData eventData)
     {
         List<RaycastResult> result = new List<RaycastResult>();
         EventSystem.current.RaycastAll(eventData, result);
-        for(int i = 0; i < result.Count; i++)
+        for (int i = 0; i < result.Count; i++)
         {
-            if(result[i].gameObject.GetComponent<ISlot>() != null)
+            if (result[i].gameObject.GetComponent<ISlot>() != null)
             {
                 return result[i].gameObject.GetComponent<ISlot>();
             }
@@ -93,7 +97,7 @@ public class DefaultItemMovement : MonoBehaviour, ItemMovement
         return null;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
         if (isMove) EndDrag(eventData);
         else BeginDrag(eventData);

@@ -6,19 +6,25 @@ public class Slot : ISlot
 {
     public override void Put(IItem item)
     {
+        
         equipedItem = item;
+       
         equipedItem.transform.position = transform.position;
         IsEmpty = false;
-        Debug.Log(item.name + " added to" + gameObject.name);
+        
+       
+        equipedItem.transform.parent = transform;
     }
 
     public override IItem Remove()
     {
         IItem result = equipedItem;
-        Debug.Log(equipedItem.name + " removed from" + gameObject.name);
+        equipedItem.transform.parent = transform.parent.parent;
+        equipedItem.transform.SetAsLastSibling();
+        //Debug.Log(equipedItem.name + " removed from" + gameObject.name);
         equipedItem = null;
         IsEmpty = true;
-        Debug.Log("Result: " + result.name);
+        //Debug.Log("Result: " + result.name);
         return result;
     }
 

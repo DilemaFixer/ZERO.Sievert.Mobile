@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1060cb689715df443b0882edbfc3519a, type: 3}
   m_Name: Item1
   m_EditorClassIdentifier: 
-  <_image>k__BackingField: {fileID: 0}
-  <maxStack>k__BackingField: 0
-  <name>k__BackingField: 
-  <weight>k__BackingField: 0
-  <Id>k__BackingField: 0
+  <_image>k__BackingField: {fileID: -1249398206, guid: e2981cb2b93cef74a9ace4e372b1d14a, type: 3}
+  <maxStack>k__BackingField: 13
+  <name>k__BackingField: "\u041B\u043E\u0436\u043A\u0430"
+  <weight>k__BackingField: 2
+  <Id>k__BackingField: 1

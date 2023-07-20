@@ -1,29 +1,23 @@
 using UnityEngine.UI;
-using System;
 using UnityEngine;
 
 [RequireComponent(typeof(IItem))]
-[RequireComponent(typeof(ItemMovement))]
 public class ItemView : MonoBehaviour
 {
     [SerializeField] private Image _image;
-    [SerializeField] private Text _name;
     [SerializeField] private Text _count;
+    [SerializeField] private Text _name;
 
-    private IItem item;
-    public event Action OnChange;
     private void Start()
     {
-        item = GetComponent<IItem>();        
-        OnChange += ItemUpdate;
-        item.OnChange += OnChange;
-        ItemUpdate();
-        
+        UpdateChanges();
+        GetComponent<IItem>().OnChange += UpdateChanges;
     }
-    private void ItemUpdate()
+    public void UpdateChanges()
     {
-        _name.text = item.Data.name;
-        _count.text = item.Amount.ToString();
+        IItem item = GetComponent<IItem>();
         _image.sprite = item.Data._image;
+        _count.text = item.Amount.ToString();
+        _name.text = item.Data.name;
     }
 }

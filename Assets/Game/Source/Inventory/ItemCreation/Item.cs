@@ -1,8 +1,11 @@
 using System;
 using UnityEngine;
 
+[System.Serializable]
 public class Item : IItem
 {
+    
+   
     public override event Action OnChange;
 
     public override void Add(IItem item)

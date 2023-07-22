@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Game.Source.Player
+namespace Game.Entities.Player
 {
     public class PlayermMovement : MonoBehaviour
     {

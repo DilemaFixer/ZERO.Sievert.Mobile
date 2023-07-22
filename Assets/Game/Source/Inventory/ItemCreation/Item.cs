@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
 
-[System.Serializable]
+
 public class Item : IItem
 {
-    
+    public Item(ItemData data, int amount) : base(data, amount) { }
    
     public override event Action OnChange;
 

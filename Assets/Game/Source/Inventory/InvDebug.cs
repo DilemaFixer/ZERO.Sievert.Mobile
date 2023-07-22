@@ -12,7 +12,7 @@ public class InvDebug : MonoBehaviour
         if (Put)
         {
             Put = false;
-            slot.Put(item);
+            //slot.Put(item);
         }
     }
 }

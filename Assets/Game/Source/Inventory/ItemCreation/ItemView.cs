@@ -1,23 +1,33 @@
 using UnityEngine.UI;
 using UnityEngine;
 
-[RequireComponent(typeof(IItem))]
+
 public class ItemView : MonoBehaviour
 {
     [SerializeField] private Image _image;
     [SerializeField] private Text _count;
     [SerializeField] private Text _name;
+    public IItem _item { get; private set; }
 
-    private void Start()
+  
+    public void Init(IItem item)
     {
+        
+        if (_item != null) return;
+        if (item == null) return;
+        _item = item;
+        item.OnChange += UpdateChanges;
         UpdateChanges();
-        GetComponent<IItem>().OnChange += UpdateChanges;
     }
     public void UpdateChanges()
     {
-        IItem item = GetComponent<IItem>();
-        _image.sprite = item.Data._image;
-        _count.text = item.Amount.ToString();
-        _name.text = item.Data.name;
+
+        if(_item.Amount <= 0)
+        {
+            Destroy(gameObject);
+        }
+        _image.sprite = _item.Data._image;
+        _count.text = _item.Amount.ToString();
+        _name.text = _item.Data.name;
     }
 }

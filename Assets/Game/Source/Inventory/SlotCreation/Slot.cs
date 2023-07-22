@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Slot : ISlot
 {
-    public override void Put(IItem item)
+    public override void Put(ItemView item)
     {
         
         equipedItem = item;
@@ -16,9 +16,9 @@ public class Slot : ISlot
         equipedItem.transform.parent = transform;
     }
 
-    public override IItem Remove()
+    public override ItemView Remove()
     {
-        IItem result = equipedItem;
+        ItemView result = equipedItem;
         equipedItem.transform.parent = transform.parent.parent;
         equipedItem.transform.SetAsLastSibling();
         //Debug.Log(equipedItem.name + " removed from" + gameObject.name);

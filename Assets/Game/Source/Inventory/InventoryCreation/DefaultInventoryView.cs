@@ -5,7 +5,7 @@ using UnityEngine;
 public class DefaultInventoryView : MonoBehaviour, IInventoryView
 {
     [SerializeField] private ISlot emptySlotTemplate;
-    [SerializeField] private IItem emptyItemTemplate;
+    [SerializeField] private ItemView emptyItemTemplate;
     [SerializeField] private GameObject slotContainer;
     private List<ISlot> slots = new();
     private IInventory inventory;
@@ -34,7 +34,8 @@ public class DefaultInventoryView : MonoBehaviour, IInventoryView
             IItem item = inventory.GetItem(i);
             if(item != null)
             {
-                IItem itemView = Instantiate(item, slots[i].gameObject.transform);
+                ItemView itemView = Instantiate(emptyItemTemplate, slots[i].gameObject.transform);
+                itemView.Init(item);
                 slots[i].Put(itemView);
             }
         }

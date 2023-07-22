@@ -6,14 +6,14 @@ using UnityEngine.EventSystems;
 
 public class DefaultItemMovement : MonoBehaviour, ItemMovement, IPointerDownHandler
 {
-    private IItem _item;
+    private ItemView _item;
     private ISlot _previousSlot;
     private int _previousSibling;
     private bool isMove = false;
     
     private void Start()
     {
-        _item = GetComponent<IItem>();
+        _item = GetComponent<ItemView>();
     }
     public void Update()
     {
@@ -52,25 +52,18 @@ public class DefaultItemMovement : MonoBehaviour, ItemMovement, IPointerDownHand
 
         if (!slot.IsEmpty)
         {
-            if (_item.Data.Id != slot.equipedItem.Data.Id)
+            if (_item._item.Data.Id != slot.equipedItem._item.Data.Id)
             {
-                IItem extractedItem = slot.Remove();
+                ItemView extractedItem = slot.Remove();
                 _previousSlot.Put(extractedItem);
                 slot.Put(_item);
             }
             else
             {
-                slot.equipedItem.Add(_item);
-                //if (_previousSlot.equipedItem != null)
-                //{
+                slot.equipedItem._item.Add(_item._item);
+                
                 transform.position = _previousSlot.transform.position;
                 _previousSlot.Put(_item);
-
-                //}
-                /*else
-                {
-                    _previousSlot.Remove();
-                }*/
             }
         }
         else

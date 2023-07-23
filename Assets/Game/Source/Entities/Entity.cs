@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Game.Effects;
 using UnityEngine;
@@ -43,24 +42,33 @@ namespace Game.Entities
 
         public void ClearCertainEffect(SpacerForEffect effectType)
         {
-            _effects.RemoveAll(effect =>
+            List<Effect<Entity>> effectsToRemove = new List<Effect<Entity>>();
+
+                foreach (Effect<Entity> effect in _effects)
                 {
-                    switch (effectType)
+                    if (effectType == SpacerForEffect.All)
                     {
-                        case SpacerForEffect.All:
-                            return true;
-                        case SpacerForEffect.Positive when effect is PositiveEffects<Entity> positiveEffect:
-                            positiveEffect.DeactivateEffect();
-                            return true;
-                        case SpacerForEffect.Negative when effect is NegativeEffects<Entity> negativeEffect:
-                            negativeEffect.DeactivateEffect();
-                            return true;
-                        default:
-                            return false;
+                        effect.DeactivateEffect();
+                        effectsToRemove.Add(effect);
                     }
-                });
+                    else if (effectType == SpacerForEffect.Positive && effect is PositiveEffects<Entity> positiveEffect)
+                    {
+                        positiveEffect.DeactivateEffect();
+                        effectsToRemove.Add(effect);
+                    }
+                    else if (effectType == SpacerForEffect.Negative && effect is NegativeEffects<Entity> negativeEffect)
+                    {
+                        negativeEffect.DeactivateEffect();
+                        effectsToRemove.Add(effect);
+                    }
+                }
+
+                foreach (var effectToRemove in effectsToRemove)
+                {
+                    _effects.Remove(effectToRemove);
+                }
         }
-        
+
         public void ApplyEffect(Effect<Entity> Effect)
         {
             _effects.Add(Effect);

@@ -23,7 +23,7 @@ namespace Game
         
         public void resetEffect()
         {
-            _player.ClearCertainEffect(SpacerForEffect.All);
+            _player.ClearCertainEffect(SpacerForEffect.Positive);
         }
     }
 }

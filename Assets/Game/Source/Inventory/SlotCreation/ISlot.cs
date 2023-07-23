@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class ISlot : MonoBehaviour
 {
-    public bool IsEmpty { get; protected set; } = true;
+    [field: SerializeField] public bool IsEmpty { get; protected set; } = true;
     [field:SerializeField]public ItemView equipedItem { get; protected set; }
     public abstract void Put(ItemView item);
     public abstract ItemView Remove();

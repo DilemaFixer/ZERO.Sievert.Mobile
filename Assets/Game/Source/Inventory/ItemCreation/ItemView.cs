@@ -25,6 +25,7 @@ public class ItemView : MonoBehaviour
         if(_item.Amount <= 0)
         {
             Destroy(gameObject);
+            return;
         }
         _image.sprite = _item.Data._image;
         _count.text = _item.Amount.ToString();

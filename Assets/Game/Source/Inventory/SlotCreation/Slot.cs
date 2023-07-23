@@ -6,7 +6,12 @@ public class Slot : ISlot
 {
     public override void Put(ItemView item)
     {
-        
+        if(item == null)
+        {
+            Debug.Log("item null");
+            IsEmpty = true;
+            return;
+        }
         equipedItem = item;
        
         equipedItem.transform.position = transform.position;

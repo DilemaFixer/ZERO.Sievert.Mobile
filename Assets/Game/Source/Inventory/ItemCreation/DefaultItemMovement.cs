@@ -60,8 +60,9 @@ public class DefaultItemMovement : MonoBehaviour, ItemMovement, IPointerDownHand
             }
             else
             {
-                slot.equipedItem._item.Add(_item._item);
                 
+                slot.equipedItem._item.Add(_item._item);
+                if (_item._item.Amount <= 0) return;
                 transform.position = _previousSlot.transform.position;
                 _previousSlot.Put(_item);
             }

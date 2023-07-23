@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
-public class DefaultItemMovement : MonoBehaviour, ItemMovement, IPointerDownHandler
+public class DefaultItemMovement : MonoBehaviour, ItemMovement, IPointerDownHandler,IPointerUpHandler
 {
     private ItemView _item;
     private ISlot _previousSlot;
@@ -26,7 +26,7 @@ public class DefaultItemMovement : MonoBehaviour, ItemMovement, IPointerDownHand
     public void BeginDrag(PointerEventData eventData)
     {
 
-        _previousSlot = FindSlot(eventData);
+        _previousSlot = FindSlot(eventData);        
         _previousSlot.Remove();
         _previousSibling = transform.GetSiblingIndex();
         transform.SetAsLastSibling();
@@ -46,33 +46,10 @@ public class DefaultItemMovement : MonoBehaviour, ItemMovement, IPointerDownHand
         if (slot == null)
         {
             _previousSlot.Put(_item);
-            transform.position = _previousSlot.transform.position;
             return;
         }
-
-        if (!slot.IsEmpty)
-        {
-            if (_item._item.Data.Id != slot.equipedItem._item.Data.Id)
-            {
-                ItemView extractedItem = slot.Remove();
-                _previousSlot.Put(extractedItem);
-                slot.Put(_item);
-            }
-            else
-            {
-                
-                slot.equipedItem._item.Add(_item._item);
-                if (_item._item.Amount <= 0) return;
-                transform.position = _previousSlot.transform.position;
-                _previousSlot.Put(_item);
-            }
-        }
-        else
-        {
-            slot.Put(_item);
-            //_previousSlot?.Remove();
-        }
-
+        ItemView extracted = slot.Put(_item);
+        if (extracted != null) _previousSlot.Put(extracted);
     }
 
 
@@ -93,8 +70,28 @@ public class DefaultItemMovement : MonoBehaviour, ItemMovement, IPointerDownHand
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (isMove) EndDrag(eventData);
+        StartCoroutine(StartPress(1f));
+        BeginDrag(eventData);
+        /*if (isMove) EndDrag(eventData);
         else BeginDrag(eventData);
-        isMove = !isMove;
+        isMove = !isMove;*/
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+          isMove = false;
+          EndDrag(eventData);
+          StopAllCoroutines();
+            
+        
+    }
+    private IEnumerator StartPress(float delay)
+    {
+        
+        yield return new WaitForSeconds(delay);
+        isMove = true;
+        
+        
+        
     }
 }

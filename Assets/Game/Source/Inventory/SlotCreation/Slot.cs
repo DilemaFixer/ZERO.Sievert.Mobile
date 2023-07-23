@@ -4,21 +4,29 @@ using UnityEngine;
 
 public class Slot : ISlot
 {
-    public override void Put(ItemView item)
+    public override ItemView Put(ItemView itemView)
     {
-        if(item == null)
-        {
-            Debug.Log("item null");
-            IsEmpty = true;
-            return;
-        }
-        equipedItem = item;
-       
-        equipedItem.transform.position = transform.position;
-        IsEmpty = false;
         
-       
+        if(!IsEmpty)
+        {
+            if(itemView._item.Data.Id == equipedItem._item.Data.Id)
+            {
+                equipedItem._item.Add(itemView._item);
+                if (itemView._item.Amount <= 0) return null;
+                return itemView;
+            }
+           
+        }
+        ItemView extractedItem = equipedItem;
+        equipedItem = itemView;
+        equipedItem.transform.position = transform.position;
         equipedItem.transform.parent = transform;
+        if (equipedItem == null) IsEmpty = true;
+        else
+        {
+            IsEmpty = false;
+        }
+        return extractedItem;
     }
 
     public override ItemView Remove()

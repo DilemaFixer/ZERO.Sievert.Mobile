@@ -6,7 +6,7 @@ public abstract class ISlot : MonoBehaviour
 {
     [field: SerializeField] public bool IsEmpty { get; protected set; } = true;
     [field:SerializeField]public ItemView equipedItem { get; protected set; }
-    public abstract void Put(ItemView item);
+    public abstract ItemView Put(ItemView itemView);
     public abstract ItemView Remove();
     public abstract void Replace(ISlot replaceTarget);
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,14 +7,18 @@ using UnityEngine.EventSystems;
 
 public class DefaultItemMovement : MonoBehaviour, ItemMovement, IPointerDownHandler,IPointerUpHandler
 {
+    
     private ItemView _item;
     private ISlot _previousSlot;
     private int _previousSibling;
     private bool isMove = false;
-    
+    public event Action<IItem> OnPanelActivate;
+    public event Action OnPanelDeactivate;
+
     private void Start()
     {
         _item = GetComponent<ItemView>();
+        //panel = FindObjectOfType<ItemPanel>();
     }
     public void Update()
     {
@@ -79,6 +84,11 @@ public class DefaultItemMovement : MonoBehaviour, ItemMovement, IPointerDownHand
 
     public void OnPointerUp(PointerEventData eventData)
     {
+          if (!isMove) OnPanelActivate?.Invoke(_item._item);
+          else
+          {
+                OnPanelDeactivate?.Invoke();
+          }
           isMove = false;
           EndDrag(eventData);
           StopAllCoroutines();
@@ -87,11 +97,11 @@ public class DefaultItemMovement : MonoBehaviour, ItemMovement, IPointerDownHand
     }
     private IEnumerator StartPress(float delay)
     {
-        
+        OnPanelDeactivate?.Invoke();
         yield return new WaitForSeconds(delay);
         isMove = true;
         
-        
-        
+
+
     }
 }

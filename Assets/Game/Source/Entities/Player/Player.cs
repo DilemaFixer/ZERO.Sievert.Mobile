@@ -1,25 +1,34 @@
 using System;
 using System.Collections.Generic;
 using Game.Effects;
+using Game.Weapon;
 using UnityEngine;
 
 namespace Game.Entities.Player
 {
     public class Player : Entity 
     {
-        public override int _health { get; protected set; }
-        public override List<IEffect<Entity>> _effects { get; set; } = new List<IEffect<Entity>>();
-
-        public override void ApplyDamag(int Damag , int PenetrationCapacity)
+        public override void ApplyDamag(int damag , int penetrationCapacity)
         {
-            Debug.Log($"Take {Damag} damge");
-           // int currentDamag = Damag - (_resistance - PenetrationCapacity);
+            int currentDamag = damag - (_resistance - penetrationCapacity);
+         
         }
 
         public override void Attack()
         {
+            if(_currentWeapon.IsRecharging && _currentWeapon == null)
+                return;
             
+            if (_currentWeapon.HasAmmo())
+            {
+                _currentWeapon.Attack();
+            }
+            else
+            {
+                _currentWeapon.Recharging();
+            }
         }
-        
+
+       
     }
 }

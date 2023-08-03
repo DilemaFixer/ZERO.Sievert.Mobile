@@ -46,7 +46,7 @@ namespace Game.Object_Pool
         private T CreateObj( bool IsActiveByDefault = false)
         {
             var createdObj = Object.Instantiate(_prefab, _container);
-            createdObj.gameObject.SetActive(IsActiveByDefault);
+            createdObj.SetActivity(IsActiveByDefault);
             createdObj.Initialize(Push);
             _pool.Add(createdObj);
             return createdObj;

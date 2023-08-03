@@ -1,78 +1,91 @@
+using System;
 using System.Collections.Generic;
 using Game.Effects;
 using UnityEngine;
+using Game.Weapon;
 
 namespace Game.Entities
 {
-    public abstract class Entity : MonoBehaviour , IEffectable<Entity>
+    public abstract class Entity : MonoBehaviour, IEffectable<Entity>
     {
         [SerializeField] protected int _maxHealth;
-
-        public abstract List<IEffect<Entity>> _effects { get; set; } 
-        public abstract int _health { get; protected set; }
-        protected int _resistance { get; private set; }
-
+        protected int _resistance { get; set; }
+        protected Weapon.Weapon _currentWeapon;
+        
+        public List<IEffect<Entity>> _effects { get; protected set; }
+        public int _health { get; protected set; }
+        
+        public abstract void Attack();
+        public abstract void ApplyDamag(int damag, int penetrationCapacity);
+        
+        
         private void Start()
         {
             _health = _maxHealth;
         }
 
-        public void Heal(int Amount)
+        public void Heal(int amount)
         {
-            Debug.Log(Amount + " i was heal");
-           // _health += Amount
+            _health += amount;
         }
-        public abstract void ApplyDamag(int Damag , int PenetrationCapacity);
-        public abstract void Attack();
-        
 
-        public void ClearEffect(Effect<Entity> EffectType)
+        protected void SetWeapon(Weapon.Weapon weapon)
+        {
+            if (weapon != null)
+            {
+                _currentWeapon = weapon;
+            }
+            else
+            {
+                throw new NullReferenceException("New weapon is null");
+            }
+        }
+        
+        public void ClearEffect(Effect<Entity> effectType)
         {
             for (int i = 0; i < _effects.Count; i++)
             {
-                if (_effects[i].GetType() == EffectType.GetType())
+                if (_effects[i].GetType() == effectType.GetType())
                 {
                     var effect = _effects[i];
                     effect.DeactivateEffect();
                     _effects.Remove(effect);
                 }
-                Debug.Log("iteration");
             }
         }
-
+        
         public void ClearCertainEffect(SpacerForEffect effectType)
         {
             List<Effect<Entity>> effectsToRemove = new List<Effect<Entity>>();
-
-                foreach (Effect<Entity> effect in _effects)
+            foreach (Effect<Entity> effect in _effects)
+            {
+                if (effectType == SpacerForEffect.All)
                 {
-                    if (effectType == SpacerForEffect.All)
-                    {
-                        effect.DeactivateEffect();
-                        effectsToRemove.Add(effect);
-                    }
-                    else if (effectType == SpacerForEffect.Positive && effect is PositiveEffects<Entity> positiveEffect)
-                    {
-                        positiveEffect.DeactivateEffect();
-                        effectsToRemove.Add(effect);
-                    }
-                    else if (effectType == SpacerForEffect.Negative && effect is NegativeEffects<Entity> negativeEffect)
-                    {
-                        negativeEffect.DeactivateEffect();
-                        effectsToRemove.Add(effect);
-                    }
+                    effect.DeactivateEffect();
+                    effectsToRemove.Add(effect);
                 }
-
-                foreach (var effectToRemove in effectsToRemove)
+                else if (effectType == SpacerForEffect.Positive && effect is PositiveEffects<Entity> positiveEffect)
                 {
-                    _effects.Remove(effectToRemove);
+                    positiveEffect.DeactivateEffect();
+                    effectsToRemove.Add(effect);
                 }
+                else if (effectType == SpacerForEffect.Negative && effect is NegativeEffects<Entity> negativeEffect)
+                {
+                    negativeEffect.DeactivateEffect();
+                    effectsToRemove.Add(effect);
+                }
+            }
+
+            foreach (var effectToRemove in effectsToRemove)
+            {
+                _effects.Remove(effectToRemove);
+            }
         }
 
-        public void ApplyEffect(Effect<Entity> Effect)
+        public void ApplyEffect(Effect<Entity> effect)
         {
-            _effects.Add(Effect);
-            Effect.ApplyEffect(this);
+            _effects.Add(effect);
+            effect.ApplyEffect(this);
         }
     }
 }

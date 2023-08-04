@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Game.Weapon
 {
-    public abstract class Firearms : Weapon
+    public abstract class Firearms<T> : Weapon where T : Projectile
     {
         [SerializeField] public int _maxProjectileInClip { get; private set; }
-        [SerializeField] protected Projectile _projectilePrefab;
-        public AmmoHolder _ammoHolder = new AmmoHolder(10);
+        [SerializeField] protected T _projectilePrefab;
+        public AmmoHolder _ammoHolder = new AmmoHolder(1000);
         public int _currentCountProjectileInClip { get; protected set; }
         
         protected bool HasProjectilesInInventory()

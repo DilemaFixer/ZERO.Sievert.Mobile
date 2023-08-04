@@ -11,7 +11,7 @@ namespace Game.Entities.Player
         public override void ApplyDamag(int damag , int penetrationCapacity)
         {
             int currentDamag = damag - (_resistance - penetrationCapacity);
-         
+            Debug.Log(currentDamag);
         }
 
         public override void Attack()

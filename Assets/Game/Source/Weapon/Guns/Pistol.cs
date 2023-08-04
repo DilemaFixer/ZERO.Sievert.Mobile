@@ -1,13 +1,14 @@
-using System;
+using Game.Weapon.Projectiles;
 using UnityEngine;
 
 namespace Game.Weapon
 {
-    public class Pistol : Firearms
+    public class Pistol : Firearms<PistolProjectile>
     {
         public override void Attack()
         {
-            Instantiate(_projectilePrefab, _startAttackPoint.position, Quaternion.identity);
+          var projectile = Instantiate(_projectilePrefab, _startAttackPoint.position, Quaternion.identity);
+          projectile.SetVectorMove(Vector3.right);
             _currentCountProjectileInClip -= 1;
         }
 

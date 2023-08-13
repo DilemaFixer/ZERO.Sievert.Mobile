@@ -368,6 +368,7 @@ GameObject:
   - component: {fileID: 619199856}
   - component: {fileID: 619199855}
   - component: {fileID: 619199854}
+  - component: {fileID: 619199857}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Untagged
@@ -387,8 +388,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e14035f9e7048a09c5b08cd8a612373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _recharging: 5
   _startAttackPoint: {fileID: 689921307}
+  _attackDelayTime: 1
+  <_maxProjectileInClip>k__BackingField: 6
+  _rechargingTime: 2
   _projectilePrefab: {fileID: 5588921543033022789, guid: a2e084c1debeeb240bda6d43601221b2, type: 3}
 --- !u!212 &619199855
 SpriteRenderer:
@@ -458,6 +461,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &619199857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 619199853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1095beb0dddc44b9904b04afb79508e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 0
+  <_resistance>k__BackingField: 0
+  _weapon: {fileID: 619199854}
 --- !u!1 &622260057
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,6 +956,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 100
+  <_resistance>k__BackingField: 0
 --- !u!1 &1044018139
 GameObject:
   m_ObjectHideFlags: 0
@@ -1088,8 +1107,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 619199854}
-        m_TargetAssemblyTypeName: Game.Weapon.Pistol, Assembly-CSharp
+      - m_Target: {fileID: 619199857}
+        m_TargetAssemblyTypeName: Game.Entities.Player.Player, Assembly-CSharp
         m_MethodName: Attack
         m_Mode: 1
         m_Arguments:
@@ -1444,12 +1463,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1982257038}
-  - component: {fileID: 1982257037}
   - component: {fileID: 1982257039}
-  - component: {fileID: 1982257041}
-  - component: {fileID: 1982257040}
-  - component: {fileID: 1982257042}
-  - component: {fileID: 1982257043}
   m_Layer: 0
   m_Name: MapGenerator
   m_TagString: Untagged
@@ -1457,22 +1471,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1982257037
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982257036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54af72dc98cc89e46b13a065da3b2464, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _terrainFactory: {fileID: 1982257042}
-  _buildingsFactory: {fileID: 1982257041}
-  _forestFactory: {fileID: 1982257040}
-  _rocksFactory: {fileID: 1982257043}
 --- !u!4 &1982257038
 Transform:
   m_ObjectHideFlags: 0
@@ -1503,63 +1501,10 @@ MonoBehaviour:
   _valueForCerealizedDictionarie:
   - _key: 1
     _value: {fileID: 11400000, guid: 1f68cafbef61a174784c10f7007f82c0, type: 2}
-  mapFactory: {fileID: 1982257037}
---- !u!114 &1982257040
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982257036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e262cb6e93e4478cb973396ca36c4ba0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _perent: {fileID: 749182278}
---- !u!114 &1982257041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982257036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fd4f5a1dd8648ee8644d0191a1385b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _perent: {fileID: 1604792009}
---- !u!114 &1982257042
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982257036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac8e66f92c584d68b500b2c480fdd489, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _spawnOffsetFromX: 1
-  _spawnOffsetFromY: 0.97
-  _perent: {fileID: 622260058}
---- !u!114 &1982257043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982257036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94c153dedd564847923ccea78ce0ef78, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _perent: {fileID: 1058363449}
-  _offsetX: 1
-  _offsetY: 0.97
+  <PerentForTerrian>k__BackingField: {fileID: 622260058}
+  <PerentForForest>k__BackingField: {fileID: 749182278}
+  <PerentForBildings>k__BackingField: {fileID: 1604792009}
+  <PerentForRock>k__BackingField: {fileID: 1058363449}
 --- !u!1001 &774212512029022959
 PrefabInstance:
   m_ObjectHideFlags: 0

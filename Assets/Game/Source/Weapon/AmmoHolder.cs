@@ -24,8 +24,21 @@ namespace Game.Weapon
         {
             return _ammoCount >= amount;
         }
+
+        public int GetMaximumAmountAvailableProjectile(int rightAmount)
+        {
+            if (_ammoCount >= rightAmount)
+            {
+                ConsumeAmmo(rightAmount);
+                return rightAmount;
+            }
+
+            int currentAmountOfProjectile = _ammoCount;
+            ConsumeAmmo(_ammoCount);
+            return currentAmountOfProjectile;
+        }
         
-        public bool HasAmmo()
+        public bool HasProjectile()
         {
             return _ammoCount > 0;
         }

@@ -3,27 +3,28 @@ using UnityEngine;
 
 namespace Game
 {
-    public class BuildingsFactory : MonoBehaviour
+    public class BuildingsFactory 
     {
-        [SerializeField] private Transform _perent;
-        
+        private SettingsForBildingGenerator _settingsForBildingGenerator;
         private MapSettings _currentMapSettings;
         private Block[,] _terrainMap;
-        private SettingsForBildingGenerator _settingsForBildingGenerator;
+        private Transform _perent;
+        
      public List<GameObject> GenerateBildings(MapSettings CurrentMapSettings , Block[,] TerrainMap)
      {
          _currentMapSettings = CurrentMapSettings;
          _terrainMap = TerrainMap;
-         
-        List<GameObject> result = new List<GameObject>();
          _settingsForBildingGenerator = _currentMapSettings.SettingsForBildingGenerator;
-        
+         _perent = CurrentMapSettings.PerentForBildings;
+         
+         List<GameObject> result = new List<GameObject>();
+         
         for (int i = 0; i < _settingsForBildingGenerator.CompulsoryBuildings.Count ; i++)
         {
           var spawnBlock = SearchingFreeSpace(_settingsForBildingGenerator.CompulsoryBuildings[i].Width ,
               _settingsForBildingGenerator.CompulsoryBuildings[i].Height );
           
-          result.Add(Instantiate(_settingsForBildingGenerator.CompulsoryBuildings[i].Prefab , spawnBlock.transform.position ,
+          result.Add(GameObject.Instantiate(_settingsForBildingGenerator.CompulsoryBuildings[i].Prefab , spawnBlock.transform.position ,
               Quaternion.identity , _perent));
         }
 
@@ -32,7 +33,7 @@ namespace Game
             var spawnBlock = SearchingFreeSpace(_settingsForBildingGenerator.Dunges[i].Width ,
                 _settingsForBildingGenerator.Dunges[i].Height);
           
-            result.Add(Instantiate(_settingsForBildingGenerator.Dunges[i].Prefab , spawnBlock.transform.position ,
+            result.Add(GameObject.Instantiate(_settingsForBildingGenerator.Dunges[i].Prefab , spawnBlock.transform.position ,
                 Quaternion.identity ,  _perent));
         }
         

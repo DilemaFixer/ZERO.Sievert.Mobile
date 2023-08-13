@@ -2,30 +2,29 @@
 
 namespace Game
 {
-    public class RocksFactory : MonoBehaviour
+    public class RocksFactory 
     {
-         
-        [SerializeField] private Transform _perent;
-        [SerializeField] private float _offsetX;
-        [SerializeField] private float _offsetY;
-        
         private GameObject _rocksPrefab;
         private Vector3 _currentSpawnPoint;
         private MapSettings _settings;
         private Block[,] _terrain;
         
+        private float _offsetX = 0.99f;
+        private float _offsetY = 1f;
+
         public void SpawnRocksAroundMap(MapSettings Settings , Block[,] Terrain)
         {
             _settings = Settings;
             _terrain = Terrain;
             _rocksPrefab = Settings.RocksPrefab;
+
             SpawnOneSide(0, 0, _settings.Width ,StepType.Down, StepType.Right);
-            SpawnOneSide(Terrain.GetLength(0) -1, 0, _settings.Height,StepType.Left, StepType.Down);
+            SpawnOneSide(_terrain.GetLength(0) -1, 0, _settings.Height,StepType.Left, StepType.Down);
             
-            SpawnOneSide(Terrain.GetLength(0) -1 , Terrain.GetLength(1) - 1 , 
+            SpawnOneSide(_terrain.GetLength(0) -1 , _terrain.GetLength(1) - 1 , 
                 _settings.Width ,StepType.Up , StepType.Left);
             
-            SpawnOneSide(0, Terrain.GetLength(1) - 1 , _settings.Height ,
+            SpawnOneSide(0, _terrain.GetLength(1) - 1 , _settings.Height ,
                 StepType.Right , StepType.Up);
         }
 
@@ -41,8 +40,8 @@ namespace Game
         }
         private GameObject SpawnWithStep(StepType Step)
         {
-            var result = Instantiate(_rocksPrefab, _currentSpawnPoint,
-                Quaternion.identity, _perent);
+            var result = GameObject.Instantiate(_rocksPrefab, _currentSpawnPoint,
+                Quaternion.identity, _settings.PerentForRock);
             StepToNextPoint(Step);
              return result;
         }
@@ -66,14 +65,7 @@ namespace Game
             }
         }
     }
-
-    public enum TypesSidesSquare
-    {
-        Up,
-        Down,
-        Left,
-        Right
-    }
+    
     public enum StepType
     {
         Up,

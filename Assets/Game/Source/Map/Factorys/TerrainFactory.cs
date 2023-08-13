@@ -5,27 +5,20 @@ using UnityEngine;
 
 namespace Game
 {
-    public class TerrainFactory : MonoBehaviour
+    public class TerrainFactory 
     {
-        [SerializeField] private float _spawnOffsetFromX;
-        [SerializeField] private float _spawnOffsetFromY;
-
-         
-        [SerializeField] private Transform _perent;
-        
-        private Vector3 _currentSpawnPosition;
-        private int _currentWidth;
-        private MapSettings _currentMapSettings;
         private List<Block> _grass;
         private List<Block> _ground;
-        private Block _lake;
+        
+        private MapSettings _currentMapSettings;
+        private Vector3 _currentSpawnPosition;
+        private Transform _perent;
+        
+        private int _currentWidth;
         
         public Block[,] GenerateTerrain(MapSettings CurrentMapSettings)
         {
             _currentMapSettings = CurrentMapSettings;
-            _grass = CurrentMapSettings.Grass;
-            _ground = CurrentMapSettings.Ground;
-            _lake = CurrentMapSettings.Lake;
             
             Block[,] blocksMap = new Block[_currentMapSettings.Height ,_currentMapSettings.Width];
             float[,] noise = MakeNoiseMap(_currentMapSettings);
@@ -40,14 +33,14 @@ namespace Game
                     Block currentBlock;
                 
                     if (noiseValue < 0.10f)
-                        currentBlock = _lake;
+                        currentBlock = _currentMapSettings.Lake;
                     else if (noiseValue < 0.66f)
-                        currentBlock = IEnumerableHealper.GetRandomObjFromList(_grass);
+                        currentBlock = IEnumerableHealper.GetRandomObjFromList(_currentMapSettings.Grass);
                     else
-                        currentBlock = IEnumerableHealper.GetRandomObjFromList(_ground);
+                        currentBlock = IEnumerableHealper.GetRandomObjFromList(_currentMapSettings.Ground);
 
                     blocksMap[x, y] = Spawn(currentBlock);
-                    StepToNextSpawnPosition(_currentMapSettings);
+                    StepToNextSpawnPosition();
                 }
             }
 
@@ -56,22 +49,22 @@ namespace Game
 
         private T Spawn<T>(T Prefabs) where T : Object
         {
-            T  result = Instantiate(Prefabs, _currentSpawnPosition, Quaternion.identity, _perent);
+            T  result = GameObject.Instantiate(Prefabs, _currentSpawnPosition, Quaternion.identity, _currentMapSettings.PerentForTerrian);
             return result;
         }
     
-        private void StepToNextSpawnPosition(MapSettings _currentMapSettings)
+        private void StepToNextSpawnPosition()
         {
             _currentWidth++;
             if(_currentWidth == _currentMapSettings.Width)
             {
                 _currentSpawnPosition.x = _currentMapSettings.SpawnPoint.position.x;
-                _currentSpawnPosition.y += _spawnOffsetFromY;
+                _currentSpawnPosition.y += _currentMapSettings.SpawnOffsetFromY;
                 _currentWidth = 0;
             }
             else
             {
-                _currentSpawnPosition.x += _spawnOffsetFromX;
+                _currentSpawnPosition.x += _currentMapSettings.SpawnOffsetFromX;
             }
         }
         private float[,] MakeNoiseMap(MapSettings _currentMapSettings)

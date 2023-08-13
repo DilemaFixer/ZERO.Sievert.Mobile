@@ -7,14 +7,19 @@ namespace Game
     public class MapMeneger : MonoBehaviour
     {
         [SerializeField] private List<ValueForCerealizedDictionary<int, MapSettings>> _valueForCerealizedDictionarie;
-        [SerializeField] private MapFactory mapFactory;
-
+        [field: SerializeField] public Transform PerentForTerrian { get; private set; }
+        [field: SerializeField] public Transform PerentForForest { get; private set; }
+        [field: SerializeField] public Transform PerentForBildings { get; private set; }
+        [field: SerializeField] public Transform PerentForRock { get; private set; }
+        
+        private MapFactory _mapFactory;
         private Dictionary<int, MapSettings> _mapsSettings;
         public Map CurrentMap { get; private set; }
 
         private void Start()
         {
             _mapsSettings = SerializableDictionary<int, MapSettings>.ConvertToDictionary(_valueForCerealizedDictionarie);
+            _mapFactory = new MapFactory();
         }
 
         public void SpawnMap(int MapIndex)
@@ -28,8 +33,10 @@ namespace Game
             {
                 DestroyMap();
             }
-
-            CurrentMap = mapFactory.GenerateMap(_mapsSettings[MapIndex] );
+            
+            MapSettings mapSettings = _mapsSettings[MapIndex];
+            mapSettings.SetPerent(PerentForTerrian, PerentForForest, PerentForBildings, PerentForRock);
+            CurrentMap = _mapFactory.GenerateMap(mapSettings);
         }
         
         private void DestroyMap()

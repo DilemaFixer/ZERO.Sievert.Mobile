@@ -1,19 +1,19 @@
-using Game.Weapon.Projectiles;
+using System.Collections;
 using UnityEngine;
 
 namespace Game.Weapon
 {
     public abstract class Weapon : MonoBehaviour
     {
-        [SerializeField] protected int _recharging;
         [SerializeField] protected Transform _startAttackPoint;
-        
-        public bool IsRecharging { get; protected set; }
+        [SerializeField] protected int _attackDelayTime;
+
+        public bool IsThereDelayedAttackNow { get; protected set; } = false;
 
         public abstract void Attack();
-        public abstract void Recharging();
-        
-        public virtual bool HasAmmo()
+        protected abstract void AttackDelay();
+
+        public virtual bool HasProjectile()
         {
             return true;
         }

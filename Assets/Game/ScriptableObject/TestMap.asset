@@ -70,3 +70,5 @@ MonoBehaviour:
   - {fileID: -5187634069607841335, guid: f09e674389a0ed34c9aaf6d2bfce45be, type: 3}
   <Lake>k__BackingField: {fileID: 1581039369578298417, guid: 7eb216649702c65419a16b6963eb74c2, type: 3}
   <RocksPrefab>k__BackingField: {fileID: 6277940006407091424, guid: 8afcc4dfbb45b2a48ad0968a6891a5ae, type: 3}
+  <SpawnOffsetFromX>k__BackingField: 0.99
+  <SpawnOffsetFromY>k__BackingField: 1

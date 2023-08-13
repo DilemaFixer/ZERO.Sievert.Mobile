@@ -7,14 +7,21 @@ namespace Game.Weapon
     {
         public override void Attack()
         {
-          var projectile = Instantiate(_projectilePrefab, _startAttackPoint.position, Quaternion.identity);
-          projectile.SetVectorMove(Vector3.right);
-            _currentCountProjectileInClip -= 1;
-        }
+            if (IsThereDelayedAttackNow || IsRechargingNow)
+            {
+                return;
+            }
 
-        public override bool HasAmmo()
-        {
-            return _currentCountProjectileInClip > 0;
+            if (СurrentCountProjectileInClip == 0)
+            {
+                Recharging();
+                return;
+            }
+            
+            var projectile = Instantiate(_projectilePrefab, _startAttackPoint.position, Quaternion.identity);
+            projectile.SetVectorMove(Vector3.right);
+            СurrentCountProjectileInClip -= 1;
+            AttackDelay();
         }
     }
 }

@@ -2,20 +2,17 @@ using System;
 using System.Collections.Generic;
 using Game.Effects;
 using UnityEngine;
-using Game.Weapon;
 
 namespace Game.Entities
 {
     public abstract class Entity : MonoBehaviour, IEffectable<Entity>
     {
+         
         [SerializeField] protected int _maxHealth;
-        protected int _resistance { get; set; }
-        protected Weapon.Weapon _currentWeapon;
-        
+        [field: SerializeField] public int _resistance { get; protected set; }
         public List<IEffect<Entity>> _effects { get; protected set; }
         public int _health { get; protected set; }
         
-        public abstract void Attack();
         public abstract void ApplyDamag(int damag, int penetrationCapacity);
         
         
@@ -29,18 +26,6 @@ namespace Game.Entities
             _health += amount;
         }
 
-        protected void SetWeapon(Weapon.Weapon weapon)
-        {
-            if (weapon != null)
-            {
-                _currentWeapon = weapon;
-            }
-            else
-            {
-                throw new NullReferenceException("New weapon is null");
-            }
-        }
-        
         public void ClearEffect(Effect<Entity> effectType)
         {
             for (int i = 0; i < _effects.Count; i++)

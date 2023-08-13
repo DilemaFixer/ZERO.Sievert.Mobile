@@ -114,8 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8569e2f446346a7a94c7c31c8a26e26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  _longFlightTime: 10
+  speed: 20
+  _longFlightTime: 4
   _penetrationCapacity: 1
   _damage: 5
   _targetLayers:

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Source.Enemy
 {
-    public class Enemy : Entity
+    public class Enemy : IntelligentEntity
     {
         public override void Attack()
         {

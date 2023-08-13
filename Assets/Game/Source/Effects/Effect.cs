@@ -10,6 +10,5 @@ namespace Game.Effects
         {
             IsEffectDeactivate = true;
         }
-        
     }
 }

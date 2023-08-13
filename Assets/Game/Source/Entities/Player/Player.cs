@@ -1,14 +1,13 @@
-using System;
-using System.Collections.Generic;
-using Game.Effects;
-using Game.Weapon;
+using Game.Source;
 using UnityEngine;
 
 namespace Game.Entities.Player
 {
-    public class Player : Entity 
+    public class Player : IntelligentEntity
     {
-        public override void ApplyDamag(int damag , int penetrationCapacity)
+        [SerializeField] private Weapon.Weapon _weapon;
+
+        public override void ApplyDamag(int damag, int penetrationCapacity)
         {
             int currentDamag = damag - (_resistance - penetrationCapacity);
             Debug.Log(currentDamag);
@@ -16,19 +15,13 @@ namespace Game.Entities.Player
 
         public override void Attack()
         {
-            if(_currentWeapon.IsRecharging && _currentWeapon == null)
+            _currentWeapon = _weapon;
+            if (_currentWeapon == null)
+            {
                 return;
-            
-            if (_currentWeapon.HasAmmo())
-            {
-                _currentWeapon.Attack();
             }
-            else
-            {
-                _currentWeapon.Recharging();
-            }
-        }
 
-       
+            _currentWeapon.Attack();
+        }
     }
 }

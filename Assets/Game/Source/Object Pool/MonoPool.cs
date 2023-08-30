@@ -110,5 +110,8 @@ namespace Game.Object_Pool
             _pullObject = PullObject;
             _pushObject = PushObject;
         } 
+        /*
+         * public void TestPull(Acti)
+         */
     }
 }

@@ -1,6 +1,3 @@
-using Game.Entities;
-using UnityEngine;
-
 namespace Game.Source.Enemy
 {
     public class Enemy : IntelligentEntity

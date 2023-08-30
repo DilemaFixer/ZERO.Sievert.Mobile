@@ -9,14 +9,10 @@ namespace Game.Source
         public abstract void Attack();
         public void SetWeapon(Weapon.Weapon weapon)
         {
-            if (weapon != null)
-            {
-                _currentWeapon = weapon;
-            }
-            else
-            {
+            if (weapon == null)
                 throw new NullReferenceException("New weapon is null");
-            }
+            
+            _currentWeapon = weapon;
         }
     }
 }

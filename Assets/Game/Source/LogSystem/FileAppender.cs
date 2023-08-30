@@ -29,7 +29,7 @@ namespace Game.LogSystem
 
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }

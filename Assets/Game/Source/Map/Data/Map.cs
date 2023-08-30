@@ -29,5 +29,16 @@ namespace Game
                 return;
             this.Buildings = Buildings;
         }
+
+        public Block GetUnlockedBlock()
+        {
+            Block block = Land[Random.Range(0, Land.GetLength(0)) , Random.Range(0, Land.GetLength(1))];
+            if (block.IsBlocked)
+            {
+                return GetUnlockedBlock();
+            }
+
+            return block;
+        }
     }
 }

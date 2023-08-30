@@ -5,19 +5,26 @@ namespace Game.Entities.Player
 {
     public class PlayermMovement : MonoBehaviour
     {
-        [SerializeField] private VariableJoystick _variableJoystick;
         [SerializeField] private Rigidbody2D _rigidbody;
         [SerializeField] private float _maxSpeed;
         [SerializeField] private float _minSpeed;
         [SerializeField] private int smoothnessFactor;
-        
         [SerializeField] private float _currentSpeed;
+        
+        private VariableJoystick _variableJoystick;
+        
         private bool IsRun;
+        
         private void Start()
         {
             _currentSpeed = _minSpeed;
         }
 
+        public void SetJoystic(VariableJoystick variableJoystick)
+        {
+            _variableJoystick = variableJoystick;
+        }
+        
         private void FixedUpdate()
         {
             if (IsRun)

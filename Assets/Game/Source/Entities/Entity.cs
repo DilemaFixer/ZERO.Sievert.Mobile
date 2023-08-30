@@ -7,7 +7,6 @@ namespace Game.Entities
 {
     public abstract class Entity : MonoBehaviour, IEffectable<Entity>
     {
-         
         [SerializeField] protected int _maxHealth;
         [field: SerializeField] public int _resistance { get; protected set; }
         public List<IEffect<Entity>> _effects { get; protected set; }

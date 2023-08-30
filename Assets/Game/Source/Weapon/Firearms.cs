@@ -26,7 +26,7 @@ namespace Game.Weapon
             IsRechargingNow = true;
             int projectileAmount;
             projectileAmount = _ammoHolder.GetMaximumAmountAvailableProjectile(_maxProjectileInClip);
-            Debug.Log(projectileAmount);
+            
             if (projectileAmount > 0)
             {
                 for (int i = 0; i < projectileAmount; i++)

@@ -66,7 +66,7 @@ namespace Game.LogSystem
                 }
                 _mre.Set();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // ignored
             }
@@ -102,7 +102,7 @@ namespace Game.LogSystem
                             Thread.Sleep(5);
                         }
                     }
-                    catch (Exception e)
+                    catch (Exception)
                     {
                        break;
                     }

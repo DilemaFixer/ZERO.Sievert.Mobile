@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1635366740615468607}
   - component: {fileID: 1635366740615468600}
   - component: {fileID: 1635366740615468601}
+  - component: {fileID: 1400148067631306248}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -99,9 +100,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f04299efd448ad9284f2bc0e144d2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _variableJoystick: {fileID: 0}
-  _speed: 3
-  speed: 5
+  _rigidbody: {fileID: 1635366740615468601}
+  _maxSpeed: 6
+  _minSpeed: 3.13
+  smoothnessFactor: 200
+  _currentSpeed: 0
 --- !u!70 &1635366740615468600
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -139,3 +142,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1400148067631306248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1635366740615468602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1095beb0dddc44b9904b04afb79508e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _maxHealth: 0
+  <_resistance>k__BackingField: 0
+  _weapon: {fileID: 0}
+  _playermMovement: {fileID: 1635366740615468607}
